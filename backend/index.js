@@ -46,7 +46,22 @@ app.get("/books", async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+// Getting data by id
+app.get("/books/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const singleBook = await Book.findById(id);
 
+    res.status(200).json({
+      count: singleBook.length,
+      data: singleBook,
+    });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
+
+// connection
 mongoose
   .connect(MONGO_URI)
   .then(() => {
