@@ -60,7 +60,31 @@ app.get("/books/:id", async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+// updating data
+app.put("/books/:id", async (req, res) => {
+  try {
+    // checking body
+    if (!req.body.title || !req.body.author || !req.body.publishYear) {
+      return res.status(400).send({
+        message: "Send All Require Field: Title, Author, PublishYear",
+      });
+    }
 
+    // extracting id
+    const { id } = req.params;
+
+    // need 2 item, id and body
+    const updateBook = await Book.findByIdAndUpdate(id, req.body);
+    //fail
+    if (!updateBook) return res.status(404).json({ message: "Book not found" });
+    // found
+    res.status(200).json({
+      message: "Update successful. :)",
+    });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+});
 // connection
 mongoose
   .connect(MONGO_URI)
