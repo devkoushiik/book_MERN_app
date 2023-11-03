@@ -23,7 +23,7 @@ const Home = () => {
       console.log(error.message);
     }
   };
-  console.log(books);
+  console.log(books, "from home");
 
   // fetching data
   useEffect(() => {
@@ -74,13 +74,13 @@ const Home = () => {
                   <td className="border border-slate-700 rounded-md text-center">
                     <div className="flex justify-center gap-x-0">
                       <Link to={`/books/details/${book._id}`}>
-                        <BsInfoCircle className="text-2xl text-green-800" />
+                        <BsInfoCircle className="text-2xl text-green-800 mx-5" />
                       </Link>
-                      <Link to={`/books/details/${book._id}`}>
-                        <AiOutlineEdit className="text-2xl text-yellow-600" />
+                      <Link to={`/books/edit/${book._id}`}>
+                        <AiOutlineEdit className="text-2xl text-yellow-600  mx-5" />
                       </Link>
-                      <Link to={`/books/details/${book._id}`}>
-                        <MdOutlineDelete className="text-2xl text-red-600" />
+                      <Link to={`/books/delete/${book._id}`}>
+                        <MdOutlineDelete className="text-2xl text-red-600  mx-5" />
                       </Link>
                     </div>
                   </td>

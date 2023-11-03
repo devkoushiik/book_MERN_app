@@ -1,4 +1,4 @@
 const EditBook = () => {
-  return <div>EditBook</div>;
+  return <div>Details Book</div>;
 };
 export default EditBook;
