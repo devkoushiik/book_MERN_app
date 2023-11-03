@@ -1,4 +1,5 @@
+import EditBookComp from "../components/EditBookComp";
 const EditBook = () => {
-  return <div>Details Book</div>;
+  return <EditBookComp />;
 };
 export default EditBook;
