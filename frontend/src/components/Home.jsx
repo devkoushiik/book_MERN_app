@@ -1,15 +1,16 @@
 import { Link } from "react-router-dom";
 
-import axios from "axios";
-import { AiOutlineEdit } from "react-icons/ai";
-import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
-
-import Spinner from "./Spinner";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import { MdOutlineAddBox } from "react-icons/md";
+import Spinner from "./Spinner";
+import BooksTable from "../components/home/BooksTable";
+import BookCard from "../components/home/BookCard";
+
 const Home = () => {
   const [books, setBooks] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [showType, setShowType] = useState("table");
 
   const dataFetching = async () => {
     try {
@@ -31,66 +32,48 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="p-4">
-      <div className="flex justify-center items-center">
-        <h1 className="text-3xl my-8 mx-5">Book List</h1>
-        <Link to={"/books/create"}>
-          <MdOutlineAddBox className="text-sky-800 text-4xl items-center" />
-        </Link>
+    <>
+      <div className="-z-50 fixed bg-fixed-background opacity-10">
+        <img className="bg-cover bg-center" src="flower.svg" alt="flower" />
       </div>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <table className="w-full border-separate border-spacing-2">
-          <thead>
-            <tr>
-              <th className="border border-slate-600 rounded-md">No</th>
-              <th className="border border-slate-600 rounded-md">Title</th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
-                Author
-              </th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
-                Publish Year
-              </th>
-              <th className="border border-slate-600 rounded-md">Operations</th>
-            </tr>
-          </thead>
-          <tbody>
-            {books.map((book, index) => {
-              return (
-                <tr key={book._id} className="h-8">
-                  <td className="border border-slate-700 rounded-md text-center">
-                    {index + 1}
-                  </td>
-                  <td className="border border-slate-700 rounded-md text-center">
-                    {book.title}
-                  </td>
-                  <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                    {book.author}
-                  </td>
-                  <td className="border border-slate-700 rounded-md text-center max-md:hidden">
-                    {book.publishYear}
-                  </td>
-                  <td className="border border-slate-700 rounded-md text-center">
-                    <div className="flex justify-center gap-x-0">
-                      <Link to={`/books/details/${book._id}`}>
-                        <BsInfoCircle className="text-2xl text-green-800 mx-5" />
-                      </Link>
-                      <Link to={`/books/edit/${book._id}`}>
-                        <AiOutlineEdit className="text-2xl text-yellow-600  mx-5" />
-                      </Link>
-                      <Link to={`/books/delete/${book._id}`}>
-                        <MdOutlineDelete className="text-2xl text-red-600  mx-5" />
-                      </Link>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
-    </div>
+      <div className="p-4 relative">
+        <div>
+          <div className="flex justify-center items-center mt-5 gap-x-4">
+            <button
+              className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+              onClick={() => setShowType("table")}
+            >
+              Table
+            </button>
+            <button
+              className="bg-sky-300 hover:bg-sky-600 px-4 py-1 rounded-lg"
+              onClick={() => setShowType("card")}
+            >
+              Card
+            </button>
+          </div>
+          <p className="italic font-sm flex justify-center mt-3">
+            <mark>Click on Card for card view.</mark>
+          </p>
+        </div>
+
+        <div>
+          <h1 className="text-3xl my-8 mx-5 text-center font-bold">
+            Book List
+          </h1>
+          <Link to={"/books/create"}>
+            <MdOutlineAddBox className="text-sky-800 text-4xl items-center ml-2" />
+          </Link>
+        </div>
+        {isLoading ? (
+          <Spinner />
+        ) : showType === "table" ? (
+          <BooksTable books={books} />
+        ) : (
+          <BookCard books={books} />
+        )}
+      </div>
+    </>
   );
 };
 export default Home;
