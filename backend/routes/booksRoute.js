@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
     }
 
     const newBook = {
-      tittle: req.body.title,
+      title: req.body.title,
       author: req.body.author,
       publishYear: req.body.publishYear,
     };

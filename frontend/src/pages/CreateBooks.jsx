@@ -1,4 +1,10 @@
+import CreateBookComp from "../components/CreateBookComp";
+
 const CreateBooks = () => {
-  return <div>CreateBooks</div>;
+  return (
+    <div>
+      <CreateBookComp />
+    </div>
+  );
 };
 export default CreateBooks;
