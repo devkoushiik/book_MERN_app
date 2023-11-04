@@ -1,6 +1,4 @@
 import { AiOutlineClose, AiOutlineNumber } from "react-icons/ai";
-import { BiUserCircle } from "react-icons/bi";
-import { PiBookOpenTextLight } from "react-icons/pi";
 
 const BookModal = ({ item, onClose }) => {
   return (

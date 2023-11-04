@@ -9,7 +9,7 @@ const app = express();
 // Middleware for parsing body request
 app.use(express.json());
 // cors preventing error [by default cors(*)]
-// app.use(cors());
+app.use(cors());
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -18,7 +18,7 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
+app.get(`/`, (req, res) => {
   return res.status(234).send("This is Book Store App");
 });
 
