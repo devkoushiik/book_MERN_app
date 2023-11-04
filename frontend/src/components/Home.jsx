@@ -59,7 +59,11 @@ const Home = () => {
 
         <div>
           <h1 className="text-3xl my-8 mx-5 text-center font-bold">
-            Book List
+            Future Books from{" "}
+            <abbr title="Bangladesh University Of Business And Technology.">
+              <span className="mr-3">BUBT</span>
+            </abbr>
+            <span>Intake-42</span>
           </h1>
           <Link to={"/books/create"}>
             <MdOutlineAddBox className="text-sky-800 text-4xl items-center ml-2" />
